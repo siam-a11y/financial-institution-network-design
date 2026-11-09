@@ -1,7 +1,7 @@
-AFS-HQ-R1#show running-config
+AFS-HQ-R1#show running-config 
 Building configuration...
 
-Current configuration : 2883 bytes
+Current configuration : 2675 bytes
 !
 version 15.1
 no service timestamps log datetime msec
@@ -37,7 +37,6 @@ crypto isakmp policy 10
  authentication pre-share
  group 5
 !
-crypto isakmp key vpnpa55 address 190.200.100.6
 crypto isakmp key vpnpa55 address 190.200.100.9
 !
 !
@@ -46,7 +45,6 @@ crypto ipsec transform-set VPN-SET esp-aes esp-sha-hmac
 !
 crypto map VPN-MAP 10 ipsec-isakmp 
  description VPN connection to SERVERSIDE-SITE.
- set peer 190.200.100.6
  set peer 190.200.100.9
  set transform-set VPN-SET 
  match address 110
@@ -134,12 +132,9 @@ router ospf 10
  log-adjacency-changes
  network 192.168.21.16 0.0.0.3 area 0
  network 192.168.21.20 0.0.0.3 area 0
- network 192.200.100.0 0.0.0.3 area 0
- network 192.200.100.4 0.0.0.3 area 0
  network 190.200.100.0 0.0.0.3 area 0
  network 190.200.100.4 0.0.0.3 area 0
 !
-ip nat inside source list 50 interface Serial0/3/0 overload
 ip nat inside source list NAT-TRAFFIC interface Serial0/2/0 overload
 ip classless
 ip route 192.168.21.0 255.255.255.240 Serial0/2/0 
